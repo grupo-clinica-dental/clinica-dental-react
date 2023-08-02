@@ -1,0 +1,19 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": ["prettier"],
+  "ignorePatterns": ["**/node_modules/**"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": true,
+        "trailingComma": "es5",
+        "printWidth": 150,
+        "endOfLine": "lf",
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    ],
+    "react/display-name": "off"
+  }
+}
