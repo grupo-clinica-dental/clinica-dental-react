@@ -1,19 +1,16 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": ["prettier"],
-  "ignorePatterns": ["**/node_modules/**"],
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["standard-with-typescript", "plugin:react/recommended", "standard", "eslint-config-prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["react"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "semi": true,
-        "trailingComma": "es5",
-        "printWidth": 150,
-        "endOfLine": "lf",
-        "htmlWhitespaceSensitivity": "ignore"
-      }
-    ],
-    "react/display-name": "off"
+    "react/react-in-jsx-scope": "off"
   }
 }
