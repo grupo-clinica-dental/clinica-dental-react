@@ -3,11 +3,13 @@ import Navbar from './../../components/navbar';
 
 const MainLayout = ({ children }: any) => {
   return (
-    <div>
-      <Navbar />
-      <main className="grid h-screen place-content-center">{children}</main>
+    <>
+      <div className="flex">
+        <Navbar />
+        <main className="grow">{children}</main>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
