@@ -9,7 +9,6 @@ const DashBoardLayout = () => {
         <Navbar></Navbar>
         <Outlet />
       </main>
-      <Footer />
     </>
   );
 };
