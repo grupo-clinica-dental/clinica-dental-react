@@ -28,18 +28,18 @@ const brightturquoise = {
   '950': '#093243',
 };
 
-const shalimar = {
-  '50': '#fefee8',
-  '100': '#ffffbf',
-  '200': '#fffb88',
-  '300': '#fff244',
-  '400': '#fee211',
-  '500': '#eec904',
-  '600': '#cd9c01',
-  '700': '#a47004',
-  '800': '#87570c',
-  '900': '#734710',
-  '950': '#432505',
+const mainwhite = {
+  '50': '#fffff7',
+  '100': '#feffd5',
+  '200': '#fefcaa',
+  '300': '#fdf774',
+  '400': '#fbe73c',
+  '500': '#f9d816',
+  '600': '#eabb0c',
+  '700': '#c2920c',
+  '800': '#9a7012',
+  '900': '#7c5c12',
+  '950': '#432f07',
 };
 
 const turquoiseblue = {
@@ -56,29 +56,47 @@ const turquoiseblue = {
   '950': '#0e343e',
 };
 
+const secondwhite = {
+  '50': '#fffff2',
+  '100': '#fefec7',
+  '200': '#fdfd8a',
+  '300': '#fcf64d',
+  '400': '#fbea24',
+  '500': '#f5cd0b',
+  '600': '#d9a106',
+  '700': '#b47509',
+  '800': '#925a0e',
+  '900': '#784a0f',
+  '950': '#452703',
+};
+
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        bondiblue: {
+        maincolor: {
           ...bondiblue,
           main: bondiblue['600'],
           darker: bondiblue['900'],
         },
-        brightturquoise: {
+        secondary: {
           ...brightturquoise,
           main: brightturquoise['500'],
           darker: brightturquoise['800'],
         },
-        shalimar: {
-          ...shalimar,
-          main: shalimar['100'],
+        third: {
+          ...mainwhite,
+          main: mainwhite['50'],
         },
-        turquoiseblue: {
+        fourth: {
           ...turquoiseblue,
           main: turquoiseblue['300'],
           darker: turquoiseblue['800'],
+        },
+        fifthwhite: {
+          ...secondwhite,
+          main: secondwhite['50'],
         },
       },
     },

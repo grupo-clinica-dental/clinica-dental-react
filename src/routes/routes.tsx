@@ -30,7 +30,7 @@ export default function Router() {
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/dashboard/inicio" />, index: true },
+        { element: <Navigate to="/login" />, index: true },
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
