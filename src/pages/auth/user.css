@@ -1,3 +1,5 @@
+
+/*
 body {
     display: flex;
     justify-content: space-between;
@@ -99,10 +101,11 @@ button {
     
 }
 
+*/
 
-
-img {
+/* img {
     max-width: 200px;
-    border-radius: 50%; /* Esto hace que la foto se vea redonda */
-}
+    border-radius: 50%;
+}  /* Esto hace que la foto se vea redonda */
+
 
