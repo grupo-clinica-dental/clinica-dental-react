@@ -1,5 +1,6 @@
 import { EventHandler, FormEvent, useEffect, useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { loginRequest } from '../../services/auth/login.service';
 
 const initialUserCredentials = {
   email: '',
@@ -42,28 +43,31 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const trySignIn = async () => {
-    const token = await getSessionToken(credentials);
-    if (token) {
-      navigate('/dashboard');
-    }
-  };
+  // const trySignIn = async () => {
+  //   const token = await getSessionToken(credentials);
+  //   if (token) {
+  //     navigate('/dashboard');
+  //   }
+  // };
 
-  useEffect(() => {
-    setcredentials(initialUserCredentials);
-  }, []);
+  // useEffect(() => {
+  //   setcredentials(initialUserCredentials);
+  // }, []);
 
-  useEffect(() => {
-    trySignIn();
-  }, [loading]);
+  // useEffect(() => {
+  //   trySignIn();
+  // }, [loading]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const { email, password } = e.target.elements;
 
-    console.log(email, password);
+    const resLogin = await loginRequest(email.value, password.value);
 
-    setloading(true);
-    e.preventDefault();
+    console.log(resLogin);
+
+    // setloading(true);
   };
 
   return (
