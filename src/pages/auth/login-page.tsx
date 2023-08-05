@@ -29,12 +29,16 @@ const getUser = async (credentials: UserCredentials) => {
 
   const usersFound = users.filter(({ password, email }) => password === credentials.password && email === credentials.email);
 
+  // el doble signo de exclamacion lo que niega el primero lo invierte seria una doble negacion
+
   return usersFound.length > 0 ? true : false;
 };
 
 const LoginPage = () => {
   const [credentials, setcredentials] = useState(initialUserCredentials);
   const [loading, setloading] = useState(false);
+
+  // useQuery hacer consulta sin meterla en en un useEffect y controla el loading
 
   const navigate = useNavigate();
 
@@ -53,7 +57,11 @@ const LoginPage = () => {
     trySignIn();
   }, [loading]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const { email, password } = e.target.elements;
+
+    console.log(email, password);
+
     setloading(true);
     e.preventDefault();
   };
@@ -71,8 +79,9 @@ const LoginPage = () => {
               onChange={(evento) => {
                 setcredentials((estadoAnterior) => ({ ...estadoAnterior, email: evento.target.value }));
               }}
-              name="username"
-              type="text"
+              placeholder="Ingrese su correo electronico"
+              name="email"
+              type="email"
             />
           </div>
 
