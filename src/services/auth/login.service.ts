@@ -1,7 +1,9 @@
-import axios from 'axios';
-import { API_URL } from '../../config/config';
+import axios from '../../libs/axios';
 
 export const loginRequest = async (email: string, password: string) => {
-  console.log(API_URL);
-  return axios.post(`${API_URL}/login`, { email, password });
+  return axios.post(`/login`, { email, password });
+};
+
+export const profileRequest = async () => {
+  return axios.get(`/profile`);
 };
