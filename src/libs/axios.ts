@@ -7,11 +7,17 @@ const AUTH_API = axios.create({
   withCredentials: true,
 });
 
+// extendin Axios Headers with auth
+// interface AxiosOptions extends AxiosRequestHeaders {
+//   Authorization: string;
+// }
+
 AUTH_API.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token;
-  config.headers = {
-    Authorization: `Bearer ${token}`,
-  };
+
+  // Update the headers using AxiosRequestConfig type
+  config.headers.set('Authorization', `Bearer ${token}`);
+
   return config;
 });
 

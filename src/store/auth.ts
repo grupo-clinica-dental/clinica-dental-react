@@ -24,9 +24,11 @@ export const useAuthStore = create(
       token: '',
       profile: null,
       isAuth: false,
-      setToken: (token: string) => set((state) => ({ token, isAuth: true })),
-      setProfile: (profile: ProfileInterface) => set((state) => ({ profile })),
-      logout: () => set((state) => ({ token: '', isAuth: false, profile: null })),
+      setToken: (token: string) => set(() => ({ token, isAuth: true })),
+      setProfile: (profile: ProfileInterface) => set(() => ({ profile })),
+      logout: () => set(() => ({ token: '', isAuth: false, profile: null })),
+
+      ///SOLO USAR STATE COMO PARAM DE FUNCION CUANDO NECESITO EL ANTERIOR
     }),
     {
       name: 'auth',

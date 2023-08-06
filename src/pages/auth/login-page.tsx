@@ -1,10 +1,10 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginRequest, profileRequest } from '../../services/auth/login.service';
 import { useAuthStore } from '../../store/auth';
 
 const LoginPage = () => {
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
 
   const setToken = useAuthStore((state) => state.setToken);
   const setProfile = useAuthStore((state) => state.setProfile);
@@ -16,7 +16,9 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { email, password } = e.target.elements;
+    const loginForm = e.target as HTMLFormElement;
+
+    const { email, password } = loginForm.elements as any;
 
     const resLogin = await loginRequest(email.value, password.value);
 
