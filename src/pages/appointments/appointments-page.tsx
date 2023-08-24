@@ -21,7 +21,7 @@ const AppointmentsPage = () => {
   return (
     <main className="flex flex-col gap-y-10">
       <header>
-        <div className="flex justify-between px-10 py-10">
+        <div className="flex justify-between p-10">
           <h1 className="text-4xl font-bold">Citas</h1>
           <Link to={`/appointments/new`} className="flex items-center gap-x-2 rounded-full bg-maincolor-700 p-5 font-bold text-white">
             {' '}

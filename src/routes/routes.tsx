@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 import MainLayout from '../pages/layouts/dashboard-layout';
 import SimpleLayout from '../pages/layouts/SimpleLayout';
 import { ProtectedRoute } from '../pages/auth/protected-route-page';
@@ -12,6 +12,7 @@ const SettingsPage = lazy(() => import('../pages/settings/settings-page'));
 const AppointmentsPage = lazy(() => import('../pages/appointments/appointments-page'));
 const LoginPage = lazy(() => import('../pages/auth/login-page'));
 const Page404 = lazy(() => import('../pages/errors/error-404-page'));
+const CreateAppPage = lazy(() => import('../pages/layouts/appointments/create-appointment-page'));
 
 export default function Router() {
   const routes = useRoutes([
@@ -52,7 +53,7 @@ export default function Router() {
               path: 'new',
               element: (
                 <ProtectedRoute>
-                  <div>Create new Appointment</div>
+                  <CreateAppPage />
                 </ProtectedRoute>
               ),
             },
