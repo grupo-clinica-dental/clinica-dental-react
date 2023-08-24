@@ -1,9 +1,9 @@
-import axios from '../../libs/axios';
+import AUTH_API from '../../libs/axios';
 
 export const loginRequest = async (email: string, password: string) => {
-  return axios.post(`/login`, { email, password });
+  return AUTH_API.post(`/login`, { email, password });
 };
 
 export const profileRequest = async () => {
-  return axios.get(`/profile`);
+  return AUTH_API.get(`/profile`);
 };

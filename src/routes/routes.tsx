@@ -1,40 +1,99 @@
-import { Navigate, useRoutes } from 'react-router-dom';
-import HomePage from '../pages/home/home-page';
-import LoginPage from '../pages/auth/login-page';
-import RegisterUser from '../pages/auth/register-page';
-import PatientsPage from '../pages/patients/patients-page';
-import SettingsPage from '../pages/settings/settings-page';
-import AppointmentsPage from '../pages/appointments/appointments-page';
-import DashBoardLayout from '../pages/layouts/dashboard-layout';
-import Page404 from '../pages/errors/error-404-page';
+import { Navigate, Outlet, useRoutes } from 'react-router-dom';
+import MainLayout from '../pages/layouts/dashboard-layout';
 import SimpleLayout from '../pages/layouts/SimpleLayout';
 import { ProtectedRoute } from '../pages/auth/protected-route-page';
-import { useAuthStore } from '../store/auth';
+import { Suspense, lazy } from 'react';
+import AppointmentsLayout from '../pages/layouts/appointments/appointmentsLayOut';
+import AppointmentById from '../pages/appointments/appointments-by-id-page';
+
+const HomePage = lazy(() => import('../pages/home/home-page'));
+const PatientsPage = lazy(() => import('../pages/patients/patients-page'));
+const SettingsPage = lazy(() => import('../pages/settings/settings-page'));
+const AppointmentsPage = lazy(() => import('../pages/appointments/appointments-page'));
+const LoginPage = lazy(() => import('../pages/auth/login-page'));
+const Page404 = lazy(() => import('../pages/errors/error-404-page'));
 
 export default function Router() {
-  const isAuth = useAuthStore((state) => state.isAuth);
-
   const routes = useRoutes([
     {
-      path: '/dashboard',
+      path: '/',
       element: (
-        <ProtectedRoute isAllowed={isAuth}>
-          <DashBoardLayout />
+        <ProtectedRoute>
+          <MainLayout />
         </ProtectedRoute>
       ),
       children: [
-        { element: <Navigate to="/dashboard/inicio" />, index: true },
-        { path: 'inicio', element: <HomePage /> },
-        { path: 'usuarios', element: <RegisterUser /> },
-        { path: 'citas', element: <AppointmentsPage /> },
-        { path: 'pacientes', element: <PatientsPage /> },
-        { path: 'ajustes', element: <SettingsPage /> },
+        { element: <Navigate to="/login" />, index: true },
+        {
+          path: 'home',
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'appointments',
+          element: (
+            <ProtectedRoute>
+              <AppointmentsLayout></AppointmentsLayout>
+            </ProtectedRoute>
+          ),
+          children: [
+            {
+              element: (
+                <ProtectedRoute>
+                  <AppointmentsPage />
+                </ProtectedRoute>
+              ),
+              index: true,
+            },
+            {
+              path: 'new',
+              element: (
+                <ProtectedRoute>
+                  <div>Create new Appointment</div>
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: ':id',
+              element: (
+                <ProtectedRoute>
+                  <AppointmentById></AppointmentById>
+                </ProtectedRoute>
+              ),
+            },
+          ],
+        },
+        {
+          path: 'patients',
+          element: (
+            <ProtectedRoute>
+              <PatientsPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'settings',
+          element: (
+            <ProtectedRoute>
+              <SettingsPage />
+            </ProtectedRoute>
+          ),
+        },
       ],
     },
+
     {
       path: 'login',
-      element: <LoginPage />,
+      element: (
+        <Suspense>
+          <LoginPage />
+        </Suspense>
+      ),
     },
+
     {
       element: <SimpleLayout />,
       children: [
@@ -43,11 +102,12 @@ export default function Router() {
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },
+
     {
       path: '*',
       element: <Navigate to="/404" replace />,
     },
   ]);
 
-  return routes;
+  return <Suspense fallback={<div className="text-7xl font-bold text-black">Cargando...</div>}>{routes}</Suspense>;
 }

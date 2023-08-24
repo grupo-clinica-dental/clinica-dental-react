@@ -1,6 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Day from './calendar-day';
-function Month({ month }) {
+import { Dayjs } from 'dayjs';
+
+interface IMonthProps {
+  month: Dayjs[][];
+}
+
+function Month({ month }: IMonthProps) {
   return (
     <div className="grid flex-1 grid-cols-7 grid-rows-5">
       {month.map((row, i) => (

@@ -1,13 +1,13 @@
 // import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginRequest, profileRequest } from '../../services/auth/login.service';
-import { useAuthStore } from '../../store/auth';
+import { useAuthStore2 } from '../../store/auth';
 
 const LoginPage = () => {
   // const [loading, setloading] = useState(false);
 
-  const setToken = useAuthStore((state) => state.setToken);
-  const setProfile = useAuthStore((state) => state.setProfile);
+  const setToken = useAuthStore2((state) => state.setToken);
+  const setProfile = useAuthStore2((state) => state.setProfile);
 
   // useQuery hacer consulta sin meterla en en un useEffect y controla el loading
 
@@ -22,13 +22,13 @@ const LoginPage = () => {
 
     const resLogin = await loginRequest(email.value, password.value);
 
-    setToken(resLogin.data.token);
+    setToken(resLogin.data.data.token);
 
     const resProfile = await profileRequest();
 
-    setProfile(resProfile.data.profile);
+    setProfile(resProfile.data.data.user);
 
-    navigate('/dashboard');
+    navigate('/home');
     // setloading(true);
   };
 

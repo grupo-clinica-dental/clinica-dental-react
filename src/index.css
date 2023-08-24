@@ -10,5 +10,11 @@
     body{
         @apply bg-third-main
     }
+
+    .tailwind_1-5_grid{
+        grid-template-columns: 1fr 5fr;
+    }
 }
+
+
 
