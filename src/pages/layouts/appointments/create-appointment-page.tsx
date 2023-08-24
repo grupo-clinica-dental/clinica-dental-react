@@ -1,19 +1,29 @@
-import { Formik } from 'formik';
+import { Formik, Form, Field, FieldProps } from 'formik';
+import { DatePicker, Space } from 'antd';
+import dayjs, { Dayjs } from 'dayjs';
+import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
+
+interface FormCreateDateValues {
+  doctor_id: number | null;
+  paciente_id: number | null;
+  date: Dayjs[];
+  estado_id: number | null;
+  descripcion: string;
+  notas: string;
+  mensajes: string[];
+}
 
 export default function CreateAppPage() {
-  const initialFormValues = {
-    doctor_id: 0,
-    paciente_id: 0,
-    fecha_inicio: '',
-    fecha_final: '',
-    estado_id: '',
+  const { RangePicker } = DatePicker;
+
+  const initialFormValues: FormCreateDateValues = {
+    doctor_id: null,
+    paciente_id: null,
+    date: [],
+    estado_id: null,
     descripcion: '',
     notas: '',
-    mensajes: '',
-  };
-
-  const handleSubmit = () => {
-    console.log('submiteando');
+    mensajes: [],
   };
 
   return (
@@ -24,13 +34,20 @@ export default function CreateAppPage() {
         </div>
       </header>
       <section className="px-10">
-        <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>
-          {({ handleSubmit, isSubmitting }) => (
-            <form onSubmit={handleSubmit}>
-              <button className="rounded-full bg-maincolor-700 p-3 text-white" disabled={isSubmitting} type="submit">
+        <Formik
+          initialValues={initialFormValues}
+          onSubmit={(values, { setSubmitting }) => {
+            console.log(values.date[0].get);
+          }}
+        >
+          {({ handleSubmit, isSubmitting, setFieldValue }) => (
+            <Form onSubmit={handleSubmit}>
+              {/* <DatePicker showTime onChange={onChange} onOk={onOk} /> */}
+              <RangePicker name="date" showTime={{ format: 'HH:mm' }} format="DD-MM-YYYY HH:mm" onChange={(value) => setFieldValue('date', value)} />
+              <button className="bg-maincolor-700 p-2 text-white" type="submit">
                 Enviar
               </button>
-            </form>
+            </Form>
           )}
         </Formik>
       </section>
