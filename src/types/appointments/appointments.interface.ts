@@ -1,9 +1,9 @@
-export interface Color {
+interface Color {
   id: number;
   codigo: string;
 }
 
-export interface Doctor {
+interface Doctor {
   id: number;
   nombre: string;
   color: Color;
@@ -15,12 +15,12 @@ export interface Paciente {
   email: string;
 }
 
-export interface Estado {
+interface Estado {
   id: number;
   nombre: string;
 }
 
-export interface Mensaje {
+interface Mensaje {
   cita_id: number;
   tipo: string;
   fecha_programada: string;

@@ -19,7 +19,7 @@ const AppointmentsPage = () => {
   }, []);
 
   return (
-    <main className="flex flex-col gap-y-10">
+    <main className="flex w-[80%] grow flex-col gap-y-10">
       <header>
         <div className="flex justify-between p-10">
           <h1 className="text-4xl font-bold">Citas</h1>

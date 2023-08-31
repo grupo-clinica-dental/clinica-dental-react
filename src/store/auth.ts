@@ -64,18 +64,11 @@ interface IAuthState {
   // savedEvents: any; /// TODO EVENTS TYPE
 }
 
-export const useAuthStore2 = create<IAuthState>()(
-  persist(
-    (set) => ({
-      token: '',
-      profile: null,
-      isAuth: false,
-      setToken: (token: string) => set(() => ({ token, isAuth: true })),
-      setProfile: (profile: ProfileInterface) => set(() => ({ profile })),
-      logout: () => set(() => ({ token: '', isAuth: false, profile: null })),
-    }),
-    {
-      name: 'auth',
-    }
-  )
-);
+export const useAuthStore2 = create<IAuthState>()((set) => ({
+  token: '',
+  profile: null,
+  isAuth: false,
+  setToken: (token: string) => set(() => ({ token, isAuth: true })),
+  setProfile: (profile: ProfileInterface) => set(() => ({ profile })),
+  logout: () => set(() => ({ token: '', isAuth: false, profile: null })),
+}));

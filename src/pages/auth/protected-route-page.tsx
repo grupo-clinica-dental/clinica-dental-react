@@ -7,18 +7,23 @@ interface ProtectedRoutesProps {
   children: ReactNode;
 }
 
+// Asume que esto es tu tienda Zustand
+
 export const ProtectedRoute = ({ children }: ProtectedRoutesProps) => {
-  const isAllowed = useAuthStore2((state) => state.isAuth);
-  const user = useAuthStore2((state) => state.profile);
+  // Obtener ambos estados en una sola llamada
+  const { isAuth, profile } = useAuthStore2((state) => ({ isAuth: state.isAuth, profile: state.profile }));
 
   const acceptedRoles = [ROLES.ADMIN, ROLES.DOCTOR];
 
-  if (user && !acceptedRoles.includes(user?.rol)) {
+  // Verificar si el usuario tiene un rol aceptado
+  if (profile && !acceptedRoles.includes(profile?.rol)) {
+    return <Navigate to={'/unauthorized'} />;
+  }
+
+  // Verificar si el usuario está autenticado
+  if (!isAuth) {
     return <Navigate to={'/login'} />;
   }
 
-  if (!isAllowed) {
-    return <Navigate to={'/login'} />;
-  }
   return <>{children}</>;
 };

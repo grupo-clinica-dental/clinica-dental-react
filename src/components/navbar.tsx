@@ -25,7 +25,7 @@ const pagesLinks = [
 
 const Navbar = () => {
   return (
-    <nav className="flex h-screen w-80 flex-col items-center space-y-5 bg-maincolor-main py-10">
+    <nav className="flex h-screen w-[15%] flex-col items-center space-y-5 bg-maincolor-main py-10">
       <h3 className="text-lg text-white">Bienvenido</h3>
       <div className="h-32 w-4/5 rounded-xl bg-slate-800"></div>
       {pagesLinks.map((page, index) => {
